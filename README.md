@@ -27,7 +27,7 @@ angle-bracket form (`local: false`)
 
 If want to input source code string rather than path, use `getIncludeFilesFromString`
 
-```
+```javascript
 var src = "#include <stdio.h>\n#include \"mylib.h\"";
 cppInclude.getIncludeFilesFromString(src);
 /* [
