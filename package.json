@@ -1,0 +1,38 @@
+{
+  "name": "cpp-include",
+  "version": "1.0.0",
+  "description": "Collect path of #include directive on C/C++ source code.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha --report lcovonly"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/retorillo/cpp-include.git"
+  },
+  "keywords": [
+    "code",
+    "cplusplus",
+    "cpp",
+    "directive",
+    "header",
+    "include",
+    "source"
+  ],
+  "author": "retorillo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/retorillo/cpp-include/issues"
+  },
+  "homepage": "https://github.com/retorillo/cpp-include#readme",
+  "devDependencies": {
+    "coveralls": "^2.11.9",
+    "cson": "^4.0.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^3.2.0",
+    "should": "^11.1.2"
+  }
+}

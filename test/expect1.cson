@@ -1,0 +1,5 @@
+[
+  { path: "stdio", local: false }
+  { path: "vector", local: false }
+  { path: "mylib.h", local: true }
+]
