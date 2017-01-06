@@ -1,4 +1,4 @@
-"iostream": true
+"stdio.h": true
 "test2.h": true
 "../test/test2.h": true
 "unexpect.h": false

@@ -47,10 +47,10 @@ two additional members: `find`, `origin`.
   - When `local` is `true`, this method try to find from the following directories:
     - `origin`
     - 1st argument of this method (Array type)
-    - `INCLUDE` (ENV)
+    - `CPATH` (Linux/Mac) or `INCLUDE` (Windows)
   - Otherwise (`local` is `false`)
     - 1st argument of this method (Array type)
-    - `INCLUDE` (ENV) 
+    - `CPATH` (Linux/Mac) or `INCLUDE` (Windows) 
 
 ```javascript
 cppInclude.getIncludeFile("myapp.cpp")
@@ -63,8 +63,6 @@ cppInclude.getIncludeFile("myapp.cpp")
   .find("C:\\Users\\retorillo\\include");
 // C:\Users\retorillo\include\mylib.h
 ```
-
-Of course, works on Mac/Linux, although the above output example is Windows.
 
 ## License
 

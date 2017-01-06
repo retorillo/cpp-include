@@ -21,9 +21,12 @@ function getIncludeFilesFromString(str, opt) {
   return files;
 }
 
-function INCLUDE() {
-  return process.env["INCLUDE"].split(os.platform() != 'win32' ? /:/g : /;/g).
+function ENV(env) {
+  return (process.env[env] || "").split(os.platform() != 'win32' ? /:/g : /;/g).
     filter(p => p.length > 0);
+}
+function INCLUDE() {
+  return ENV(os.platform() != 'win32' ? "CPATH" : "INCLUDE");
 }
 
 function findpath(path, dirs) {
