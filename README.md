@@ -17,7 +17,7 @@ cppInclude.getIncludeFiles("myapp.cpp");
 ]*/
 cppInclude.getIncludeFiles("myapp.h");
 /* [
-  { path: "stdio", local: false },
+  { path: "iostream", local: false },
   { path: "mylib.h", local: true },
 ]*/
 ```
@@ -28,13 +28,43 @@ angle-bracket form (`local: false`)
 If want to input source code string rather than path, use `getIncludeFilesFromString`
 
 ```javascript
-var src = "#include <stdio.h>\n#include \"mylib.h\"";
+var src = "#include <iostream>\n#include \"mylib.h\"";
 cppInclude.getIncludeFilesFromString(src);
 /* [
-  { path: "stdio", local: false },
+  { path: "iostream", local: false },
   { path: "mylib.h", local: true },
 ]*/
 ```
+
+## Find the actual full path of include file
+
+Return items of `getIncludeFiles` and `getIncludeFilesFromString` has
+two additional members: `find`, `origin`.
+
+- `origin` represents the path of the C/C++ source code that was passed to `getIncludeFiles`.
+  - This value can be changed at any time, changing it affects the `find` method.
+- `find` is the method to accuire the actual location on the machine.
+  - When `local` is `true`, this method try to find from the following directories:
+    - `origin`
+    - 1st argument of this method (Array type)
+    - `INCLUDE` (ENV)
+  - Otherwise (`local` is `false`)
+    - 1st argument of this method (Array type)
+    - `INCLUDE` (ENV) 
+
+```javascript
+cppInclude.getIncludeFile("myapp.cpp")
+  .filter(f => { return f.path == "iostream" })[0]
+  .find();
+// C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\iostream
+
+cppInclude.getIncludeFile("myapp.cpp")
+  .filer(f => { return f.path == "mylib.h" })[0]
+  .find("C:\\Users\\retorillo\\include");
+// C:\Users\retorillo\include\mylib.h
+```
+
+Of course, works on Mac/Linux, although the above output example is Windows.
 
 ## License
 
