@@ -25,7 +25,8 @@ cppInclude.getIncludeFiles("myapp.h");
 `local` represents whether include directive is quoted-form (`local: true`) or
 angle-bracket form (`local: false`)
 
-If want to input source code string rather than path, use `getIncludeFilesFromString`
+If want to input source code string rather than path, use
+`getIncludeFilesFromString`
 
 ```javascript
 var src = "#include <iostream>\n#include \"mylib.h\"";
@@ -38,18 +39,24 @@ cppInclude.getIncludeFilesFromString(src);
 
 ## Find the actual full path of include file
 
-Return items of `getIncludeFiles` and `getIncludeFilesFromString` has
-two additional members: `find`, `origin`.
+Return items of `getIncludeFiles` and `getIncludeFilesFromString` respectively
+has two additional members: `find` and `origin`.
 
-- `origin` represents the path of the C/C++ source code that was passed to `getIncludeFiles`.
-  - This value can be changed at any time, changing it affects the `find` method.
+- `origin` represents the path of the C/C++ source code that was passed to
+  `getIncludeFiles`.
+  - This value can be changed at any time, changing it affects the `find`
+    method.
+  - **NOTE:** Semantically this value **MUST** be file path rather than
+    directory path. But `find` method can work fine as long as specified
+    directory exist. See `ensureDirname` internal function to learn why.
 - `find` is the method to accuire the actual location on the machine.
-  - When `local` is `true`, this method try to find from the following directories:
+  - When `local` is `true`, this method try to find from the following
+    directories:
     - `origin`
-    - 1st argument of this method (Array type)
+    - 1st argument of this method (string, or Array of string)
     - `CPATH` (Linux/Mac) or `INCLUDE` (Windows)
   - Otherwise (`local` is `false`)
-    - 1st argument of this method (Array type)
+    - 1st argument of this method (string, or Array of string)
     - `CPATH` (Linux/Mac) or `INCLUDE` (Windows) 
 
 ```javascript

@@ -41,17 +41,40 @@ function findpath(path, dirs) {
     }
   }
 }
+function ensureDirname(path) {
+  try {
+    return fs.statSync(path).isDirectory()
+      ? path : dirname(path);
+  }
+  catch (e) {
+    return dirname(path);
+  }
+}
+
+function ensureArray(obj) {
+  if (obj == null)
+    return [];
+  if (!(obj instanceof Array))
+    return [obj];
+  return obj;
+}
 
 function find(dirs) {
-  dirs = (dirs || []).concat(INCLUDE());
-  if (!this.local)
-    return findpath(this.path, dirs);
-  else
-    return findpath(this.path, [dirname(this.origin)]) ||
-      findpath(this.path, dirs);
+  dirs = ensureArray(dirs).concat(INCLUDE());
+  if (this.local)
+    dirs.splice(0, 0, ensureDirname(this.origin));
+  return findpath(this.path, dirs);
 }
 
 module.exports = {
   getIncludeFiles: getIncludeFiles,
   getIncludeFilesFromString: getIncludeFilesFromString,
+  _: {
+    ensureDirname: ensureDirname,
+    ensureArray: ensureArray,
+    find: find,
+    findpath: findpath,
+    ENV: ENV,
+    INCLUDE: INCLUDE,
+  }
 }
