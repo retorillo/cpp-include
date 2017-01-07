@@ -47,7 +47,8 @@ function ensureDirname(path) {
       ? path : dirname(path);
   }
   catch (e) {
-    return dirname(path);
+    return typeof(path) === 'string' ?
+      dirname(path) : ".";
   }
 }
 
